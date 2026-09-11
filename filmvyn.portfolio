@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>FILMVYN — Visuals That Tell Stories</title>
+
+  <meta
+    name="description"
+    content="FILMVYN — A creative visual portfolio focused on video editing, color grading, visual composition, framing, and scriptwriting."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #050505;
+      --bg-soft: #0a0a0a;
+      --text: #f4f4f4;
+      --muted: #9a9a9a;
+      --line: rgba(255, 255, 255, 0.09);
+      --line-bright: rgba(255, 255, 255, 0.16);
+      --card: rgba(255, 255, 255, 0.035);
+      --max: 1250px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    /* =========================
+       BACKGROUND
+    ========================= */
+
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -5;
+      overflow: hidden;
+      pointer-events: none;
+      background:
+        radial-gradient(
+          circle at 50% 30%,
+          rgba(255,255,255,0.045),
+          transparent 35%
+        ),
+        #050505;
+    }
+
+    .noise {
+      position: absolute;
+      inset: -100%;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+      animation: noiseMove 0.25s steps(2) infinite;
+    }
+
+    @keyframes noiseMove {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      25% {
+        transform: translate(2%, -1%);
+      }
+
+      50% {
+        transform: translate(-1%, 2%);
+      }
+
+      75% {
+        transform: translate(1%, 1%);
+      }
+
+      100% {
+        transform: translate(-2%, -2%);
+      }
+    }
+
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 25px 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      background: linear-gradient(
+        to bottom,
+        rgba(5,5,5,0.85),
+        transparent
+      );
+
+      backdrop-filter: blur(6px);
+    }
+
+    .logo {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      color: #bdbdbd;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 120px 5vw 80px;
+    }
+
+    .hero-content {
+      width: min(var(--max), 100%);
+      position: relative;
+      z-index: 4;
+    }
+
+    .eyebrow {
+      color: #8f8f8f;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      margin-bottom: 22px;
+      animation: fadeUp 1s ease forwards;
+      opacity: 0;
+    }
+
+    .hero h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(65px, 11vw, 165px);
+      line-height: 0.82;
+      letter-spacing: -0.07em;
+      font-weight: 600;
+      max-width: 1000px;
+      animation: fadeUp 1s 0.1s ease forwards;
+      opacity: 0;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.75);
+    }
+
+    .hero-description {
+      margin-top: 42px;
+      max-width: 560px;
+      color: #aaa;
+      font-size: 16px;
+      line-height: 1.7;
+      animation: fadeUp 1s 0.2s ease forwards;
+      opacity: 0;
+    }
+
+    .hero-actions {
+      margin-top: 32px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      animation: fadeUp 1s 0.3s ease forwards;
+      opacity: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 23px;
+      border: 1px solid var(--line-bright);
+      border-radius: 100px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.07);
+    }
+
+    .btn-primary {
+      background: white;
+      color: black;
+      border-color: white;
+    }
+
+    .btn-primary:hover {
+      background: #ddd;
+    }
+
+    /* =========================
+       3D ORB
+    ========================= */
+
+    .orb-wrap {
+      position: absolute;
+      right: 8%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: min(40vw, 500px);
+      height: min(40vw, 500px);
+      z-index: 1;
+      perspective: 900px;
+      pointer-events: none;
+    }
+
+    .orb {
+      position: absolute;
+      inset: 12%;
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle at 30% 25%,
+          rgba(255,255,255,0.95),
+          rgba(255,255,255,0.18) 12%,
+          rgba(255,255,255,0.04) 32%,
+          transparent 60%
+        );
+
+      border: 1px solid rgba(255,255,255,0.2);
+
+      box-shadow:
+        inset -35px -25px 70px rgba(0,0,0,0.85),
+        inset 15px 15px 30px rgba(255,255,255,0.12),
+        0 0 100px rgba(255,255,255,0.05);
+
+      transform-style: preserve-3d;
+      animation: orbFloat 7s ease-in-out infinite;
+    }
+
+    .orb::before,
+    .orb::after {
+      content: "";
+      position: absolute;
+      inset: 8%;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.09);
+      transform: rotateX(70deg) rotateY(20deg);
+    }
+
+    .orb::after {
+      transform: rotateX(20deg) rotateY(70deg);
+    }
+
+    @keyframes orbFloat {
+      0%,
+      100% {
+        transform:
+          rotateX(0deg)
+          rotateY(0deg)
+          translateY(0);
+      }
+
+      50% {
+        transform:
+          rotateX(12deg)
+          rotateY(-16deg)
+          translateY(-20px);
+      }
+    }
+
+    /* =========================
+       GRID
+    ========================= */
+
+    .grid {
+      position: absolute;
+      width: 180%;
+      height: 80%;
+      left: -40%;
+      bottom: -35%;
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,0.07) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.07) 1px,
+          transparent 1px
+        );
+
+      background-size: 55px 55px;
+      transform:
+        perspective(400px)
+        rotateX(62deg);
+
+      transform-origin: center top;
+      opacity: 0.55;
+      mask-image: linear-gradient(
+        to top,
+        black,
+        transparent
+      );
+
+      animation: gridMove 10s linear infinite;
+    }
+
+    @keyframes gridMove {
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: 0 110px;
+      }
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 35px;
+      left: 5vw;
+      color: #777;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      animation: fadeUp 1s 0.7s ease forwards;
+      opacity: 0;
+    }
+
+    /* =========================
+       GENERAL SECTIONS
+    ========================= */
+
+    section {
+      position: relative;
+      width: min(var(--max), 90%);
+      margin: 0 auto;
+      padding: 130px 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 55px;
+    }
+
+    .section-number {
+      color: #666;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(40px, 6vw, 76px);
+      letter-spacing: -0.05em;
+      line-height: 0.95;
+      font-weight: 500;
+    }
+
+    .section-description {
+      max-width: 360px;
+      color: #888;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    /* =========================
+       WORK / SHOWREEL
+    ========================= */
+
+    .showreel {
+      position: relative;
+      min-height: 550px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 50% 50%,
+          rgba(255,255,255,0.08),
+          transparent 35%
+        ),
+        #090909;
+    }
+
+    .showreel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          135deg,
+          transparent 0 48%,
+          rgba(255,255,255,0.07) 49%,
+          transparent 50%
+        );
+
+      background-size: 90px 90px;
+      opacity: 0.4;
+    }
+
+    .showreel-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .play-button {
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.35);
+      display: grid;
+      place-items: center;
+      margin-bottom: 25px;
+      transition: 0.35s ease;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .play-button:hover {
+      transform: scale(1.08);
+      background: rgba(255,255,255,0.09);
+    }
+
+    .play-icon {
+      width: 0;
+      height: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 12px solid white;
+      margin-left: 4px;
+    }
+
+    .showreel h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .showreel p {
+      color: #777;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* =========================
+       PROJECTS
+    ========================= */
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .project {
+      position: relative;
+      min-height: 430px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #090909;
+      transition: transform 0.45s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-7px);
+    }
+
+    .project-visual {
+      position: absolute;
+      inset: 0;
+
+      background:
+        radial-gradient(
+          circle at 70% 25%,
+          rgba(255,255,255,0.12),
+          transparent 25%
+        ),
+        linear-gradient(
+          135deg,
+          #111,
+          #050505
+        );
+    }
+
+    .project:nth-child(2) .project-visual {
+      background:
+        radial-gradient(
+          circle at 25% 40%,
+          rgba(255,255,255,0.1),
+          transparent 22%
+        ),
+        linear-gradient(
+          135deg,
+          #0b0b0b,
+          #161616
+        );
+    }
+
+    .project:nth-child(3) .project-visual {
+      background:
+        radial-gradient(
+          circle at 55% 55%,
+          rgba(255,255,255,0.13),
+          transparent 24%
+        ),
+        linear-gradient(
+          145deg,
+          #050505,
+          #131313
+        );
+    }
+
+    .project:nth-child(4) .project-visual {
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(255,255,255,0.09),
+          transparent 30%
+        ),
+        linear-gradient(
+          160deg,
+          #151515,
+          #050505
+        );
+    }
+
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          to top,
+          rgba(0,0,0,0.95),
+          rgba(0,0,0,0.1) 65%
+        );
+    }
+
+    .project-info {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 27px;
+    }
+
+    .project-category {
+      font-size: 10px;
+      color: #8b8b8b;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .project-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 29px;
+      margin-bottom: 8px;
+    }
+
+    .project-text {
+      color: #888;
+      font-size: 13px;
+      line-height: 1.6;
+      max-width: 430px;
+    }
+
+    /* =========================
+       ABOUT
+    ========================= */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-large {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(32px, 4vw, 55px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .about-large span {
+      color: #666;
+    }
+
+    .about-text {
+      color: #999;
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .about-text p + p {
+      margin-top: 25px;
+    }
+
+    /* =========================
+       SERVICES
+    ========================= */
+
+    .services {
+      border-top: 1px solid var(--line);
+    }
+
+    .service {
+      display: grid;
+      grid-template-columns: 80px 1fr 1.3fr;
+      gap: 30px;
+      align-items: center;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+      transition: 0.3s ease;
+    }
+
+    .service:hover {
+      padding-left: 12px;
+      padding-right: 12px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .service-number {
+      color: #555;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+    }
+
+    .service-name {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(23px, 3vw, 38px);
+      letter-spacing: -0.03em;
+    }
+
+    .service-description {
+      color: #777;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .contact {
+      min-height: 75vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .contact h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(55px, 10vw, 145px);
+      line-height: 0.85;
+      letter-spacing: -0.07em;
+      max-width: 1050px;
+    }
+
+    .contact h2 span {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.65);
+    }
+
+    .contact-bottom {
+      margin-top: 55px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+      border-top: 1px solid var(--line);
+      padding-top: 25px;
+    }
+
+    .contact-email {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .socials {
+      display: flex;
+      gap: 25px;
+    }
+
+    .socials a {
+      color: #777;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      transition: 0.3s;
+    }
+
+    .socials a:hover {
+      color: white;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      width: min(var(--max), 90%);
+      margin: 0 auto;
+      border-top: 1px solid var(--line);
+      padding: 25px 0 40px;
+      display: flex;
+      justify-content: space-between;
+      color: #555;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    /* =========================
+       ANIMATIONS
+    ========================= */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 900px) {
+
+      .orb-wrap {
+        right: -15%;
+        opacity: 0.45;
+        width: 55vw;
+        height: 55vw;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .service {
+        grid-template-columns: 50px 1fr;
+      }
+
+      .service-description {
+        grid-column: 2;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 650px) {
+
+      nav {
+        padding: 20px 5vw;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 150px;
+      }
+
+      .hero h1 {
+        font-size: 20vw;
+      }
+
+      .hero-description {
+        font-size: 14px;
+      }
+
+      .orb-wrap {
+        right: -35%;
+        top: 32%;
+        width: 75vw;
+        height: 75vw;
+        opacity: 0.3;
+      }
+
+      section {
+        padding: 90px 0;
+      }
+
+      .showreel {
+        min-height: 420px;
+      }
+
+      .project {
+        min-height: 360px;
+      }
+
+      .service {
+        gap: 15px;
+        grid-template-columns: 35px 1fr;
+      }
+
+      .service-description {
+        grid-column: 2;
+      }
+
+      .contact-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- BACKGROUND -->
+  <div class="background">
+    <div class="noise"></div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#home" class="logo">FILMVYN</a>
+
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+  <main id="home">
+
+    <section class="hero">
+
+      <div class="grid"></div>
+
+      <div class="orb-wrap">
+        <div class="orb"></div>
+      </div>
+
+      <div class="hero-content">
+
+        <div class="eyebrow">
+          Independent Visual Creator
+        </div>
+
+        <h1>
+          VISUALS
+          <span>THAT TELL</span>
+          STORIES.
+        </h1>
+
+        <p class="hero-description">
+          Crafting stories through editing, color, composition,
+          framing, and words. Every frame has a purpose.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#work" class="btn btn-primary">
+            View Work
+          </a>
+
+          <a href="#contact" class="btn">
+            Let's Talk
+          </a>
+        </div>
+
+      </div>
+
+      <div class="scroll-indicator">
+        Scroll to explore ↓
+      </div>
+
+    </section>
+
+
+    <!-- WORK -->
+    <section id="work" class="reveal">
+
+      <div class="section-header">
+
+        <div>
+          <div class="section-number">01 — WORK</div>
+          <h2 class="section-title">
+            SHOWREEL
+          </h2>
+        </div>
+
+        <p class="section-description">
+          A selection of visual work focused on atmosphere,
+          pacing, storytelling, and cinematic detail.
+        </p>
+
+      </div>
+
+
+      <div class="showreel">
+
+        <div class="showreel-content">
+
+          <div class="play-button">
+            <div class="play-icon"></div>
+          </div>
+
+          <h3>FILMVYN SHOWREEL</h3>
+
+          <p>
+            Selected visual work — coming soon
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+    <section id="projects" class="reveal">
+
+      <div class="section-header">
+
+        <div>
+          <div class="section-number">02 — PROJECTS</div>
+
+          <h2 class="section-title">
+            SELECTED
+            <br>
+            WORK.
+          </h2>
+        </div>
+
+        <p class="section-description">
+          Projects built around visual storytelling,
+          emotion, rhythm, and intentional composition.
+        </p>
+
+      </div>
+
+
+      <div class="projects-grid">
+
+
+        <!-- PROJECT 01 -->
+        <article class="project">
+
+          <div class="project-visual"></div>
+
+          <div class="project-overlay"></div>
+
+          <div class="project-info">
+
+            <div class="project-category">
+              Short Film
+            </div>
+
+            <h3 class="project-title">
+              Deepor Beel
+            </h3>
+
+            <p class="project-text">
+              A visual story exploring the connection between
+              people, nature, and the places they call home.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- PROJECT 02 -->
+        <article class="project">
+
+          <div class="project-visual"></div>
+
+          <div class="project-overlay"></div>
+
+          <div class="project-info">
+
+            <div class="project-category">
+              Cinematic Edit
+            </div>
+
+            <h3 class="project-title">
+              Visual Narrative
+            </h3>
+
+            <p class="project-text">
+              A cinematic edit built around atmosphere,
+              rhythm, framing, and visual emotion.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- PROJECT 03 -->
+        <article class="project">
+
+          <div class="project-visual"></div>
+
+          <div class="project-overlay"></div>
+
+          <div class="project-info">
+
+            <div class="project-category">
+              Color Grading
+            </div>
+
+            <h3 class="project-title">
+              Tone & Mood
+            </h3>
+
+            <p class="project-text">
+              Creating visual identity through contrast,
+              color, light, and controlled tonal balance.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- PROJECT 04 -->
+        <article class="project">
+
+          <div class="project-visual"></div>
+
+          <div class="project-overlay"></div>
+
+          <div class="project-info">
+
+            <div class="project-category">
+              Short Form
+            </div>
+
+            <h3 class="project-title">
+              Motion & Rhythm
+            </h3>
+
+            <p class="project-text">
+              Short-form edits designed around pacing,
+              music, transitions, and visual impact.
+            </p>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+    <section id="about" class="reveal">
+
+      <div class="section-header">
+
+        <div>
+          <div class="section-number">03 — ABOUT</div>
+
+          <h2 class="section-title">
+            BEHIND
+            <br>
+            THE FRAME.
+          </h2>
+        </div>
+
+      </div>
+
+
+      <div class="about-grid">
+
+        <div class="about-large">
+
+          I believe a good frame
+          <span>should make you feel something.</span>
+
+        </div>
+
+
+        <div class="about-text">
+
+          <p>
+            FILMVYN is a creative visual portfolio built around
+            video editing, color grading, visual composition,
+            framing, and scriptwriting.
+          </p>
+
+          <p>
+            My approach is simple:
+            understand the story first, then use the edit,
+            color, sound, and composition to make that story
+            feel intentional.
+          </p>
+
+          <p>
+            From cinematic edits to short-form content,
+            I focus on creating visuals that feel natural,
+            atmospheric, and memorable.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SERVICES -->
+    <section id="services" class="reveal">
+
+      <div class="section-header">
+
+        <div>
+          <div class="section-number">04 — SERVICES</div>
+
+          <h2 class="section-title">
+            WHAT I
+            <br>
+            DO.
+          </h2>
+        </div>
+
+        <p class="section-description">
+          Creative skills focused on turning raw footage
+          and ideas into purposeful visual stories.
+        </p>
+
+      </div>
+
+
+      <div class="services">
+
+
+        <div class="service">
+
+          <div class="service-number">
+            01
+          </div>
+
+          <div class="service-name">
+            Video Editing
+          </div>
+
+          <div class="service-description">
+            Story-driven editing, pacing, transitions,
+            sound design, and visual rhythm.
+          </div>
+
+        </div>
+
+
+        <div class="service">
+
+          <div class="service-number">
+            02
+          </div>
+
+          <div class="service-name">
+            Color Grading
+          </div>
+
+          <div class="service-description">
+            Creating mood and visual consistency through
+            contrast, color, exposure, and tonal control.
+          </div>
+
+        </div>
+
+
+        <div class="service">
+
+          <div class="service-number">
+            03
+          </div>
+
+          <div class="service-name">
+            Visual Composition
+          </div>
+
+          <div class="service-description">
+            Framing and composition designed to guide attention
+            and make every shot feel intentional.
+          </div>
+
+        </div>
+
+
+        <div class="service">
+
+          <div class="service-number">
+            04
+          </div>
+
+          <div class="service-name">
+            Scriptwriting
+          </div>
+
+          <div class="service-description">
+            Developing concepts, scenes, dialogue,
+            structure, and visual storytelling ideas.
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact reveal">
+
+      <div class="section-number">
+        05 — CONTACT
+      </div>
+
+      <h2>
+        HAVE A STORY?
+        <br>
+        <span>LET'S MAKE IT.</span>
+      </h2>
+
+
+      <div class="contact-bottom">
+
+        <a
+          class="contact-email"
+          href="mailto:YOUR-EMAIL@gmail.com"
+        >
+          YOUR-EMAIL@gmail.com
+        </a>
+
+
+        <div class="socials">
+
+          <a
+            href="https://instagram.com/YOURUSERNAME"
+            target="_blank"
+          >
+            Instagram
+          </a>
+
+          <a
+            href="#"
+          >
+            Showreel
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div>
+      © 2026 FILMVYN
+    </div>
+
+    <div>
+      Visuals That Tell Stories
+    </div>
+
+  </footer>
+
+
+  <!-- JAVASCRIPT -->
+  <script>
+
+    /* =========================
+       SCROLL REVEAL
+    ========================= */
+
+    const revealElements =
+      document.querySelectorAll(".reveal");
+
+    const revealObserver =
+      new IntersectionObserver(
+        (entries) => {
+
+          entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add("active");
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+
+    revealElements.forEach((element) => {
+      revealObserver.observe(element);
+    });
+
+
+    /* =========================
+       MOUSE PARALLAX ORB
+    ========================= */
+
+    const orb =
+      document.querySelector(".orb");
+
+    const orbWrap =
+      document.querySelector(".orb-wrap");
+
+
+    window.addEventListener("mousemove", (event) => {
+
+      if (!orb || !orbWrap) return;
+
+      const x =
+        (event.clientX / window.innerWidth - 0.5) * 2;
+
+      const y =
+        (event.clientY / window.innerHeight - 0.5) * 2;
+
+
+      orb.style.transform = `
+        rotateX(${y * -12}deg)
+        rotateY(${x * 16}deg)
+        translateY(${y * -10}px)
+      `;
+
+    });
+
+
+    /* =========================
+       RESET ORB ON MOUSE LEAVE
+    ========================= */
+
+    document.addEventListener("mouseleave", () => {
+
+      if (!orb) return;
+
+      orb.style.transform =
+        "rotateX(0deg) rotateY(0deg) translateY(0)";
+
+    });
+
+
+    /* =========================
+       NAVBAR SCROLL EFFECT
+    ========================= */
+
+    const nav =
+      document.querySelector("nav");
+
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > 50) {
+
+        nav.style.background =
+          "rgba(5,5,5,0.75)";
+
+        nav.style.backdropFilter =
+          "blur(15px)";
+
+      } else {
+
+        nav.style.background =
+          "linear-gradient(to bottom, rgba(5,5,5,0.85), transparent)";
+
+        nav.style.backdropFilter =
+          "blur(6px)";
+
+      }
+
+    });
+
+
+    /* =========================
+       SMOOTH NAVIGATION
+    ========================= */
+
+    document.querySelectorAll(
+      'a[href^="#"]'
+    ).forEach((link) => {
+
+      link.addEventListener("click", (event) => {
+
+        const targetId =
+          link.getAttribute("href");
+
+        if (!targetId || targetId === "#") {
+          return;
+        }
+
+        const target =
+          document.querySelector(targetId);
+
+        if (!target) {
+          return;
+        }
+
+        event.preventDefault();
+
+        target.scrollIntoView({
+          behavior: "smooth"
+        });
+
+      });
+
+    });
+
+  </script>
+
+</body>
+</html>
