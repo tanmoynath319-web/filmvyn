@@ -570,19 +570,15 @@ object-fit: contain;
         );
     }
 
-    .project:nth-child(3) .project-visual {
-      background:
-        radial-gradient(
-          circle at 55% 55%,
-          rgba(255,255,255,0.13),
-          transparent 24%
-        ),
-        linear-gradient(
-          145deg,
-          #050505,
-          #131313
-        );
-    }
+.project:nth-child(3) video.project-visual {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: #090909;
+}
 
     .project:nth-child(4) .project-visual {
       background:
