@@ -614,19 +614,34 @@ object-fit: contain;
   display: block;
 }
 
-    .project:nth-child(4) .project-visual {
-      background:
-        radial-gradient(
-          circle at 80% 20%,
-          rgba(255,255,255,0.09),
-          transparent 30%
-        ),
-        linear-gradient(
-          160deg,
-          #151515,
-          #050505
-        );
-    }
+.project:nth-child(4) .project-visual {
+  background:
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255,255,255,0.09),
+      transparent 30%
+    ),
+    linear-gradient(
+      160deg,
+      #151515,
+      #050505
+    );
+
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* FOURTH BLOCK — MOTION GRAPHIC */
+.project:nth-child(4) .project-visual video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;
+  object-position: center center !important;
+  transform: none !important;
+  display: block;
+}
 
     .project-overlay {
       position: absolute;
@@ -1159,7 +1174,11 @@ object-fit: contain;
         <!-- PROJECT 04 -->
         <article class="project">
 
-          <div class="project-visual"></div>
+          <div class="project-visual">
+  <video autoplay muted loop playsinline>
+    <source src="motion1.mp4" type="video/mp4">
+  </video>
+</div>
 
           <div class="project-overlay"></div>
 
